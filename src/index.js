@@ -74,16 +74,18 @@ topMenuEl.addEventListener('click', (event) => {
   });
 
   menuLinks.forEach((menuLink) => {
-    if (menuLink.text === event.target.textContent && menuLink.subLinks) {
-      if (!event.target.classList.contains('active')) {
-        subMenuEl.style.top = '100%';
-        buildSubmenu(menuLink);
+    if (menuLink.text === event.target.textContent) {
+      if (menuLink.subLinks) {
+        if (!event.target.classList.contains('active')) {
+          subMenuEl.style.top = '100%';
+          buildSubmenu(menuLink);
+        } else {
+          subMenuEl.style.top = '0';
+        }
       } else {
         subMenuEl.style.top = '0';
+        title.textContent = event.target.textContent.toUpperCase();
       }
-    } else if (!menuLink.subLinks) {
-      subMenuEl.style.top = '0';
-      title.textContent = event.target.textContent.toUpperCase();
     }
   });
   event.target.classList.toggle('active');
