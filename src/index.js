@@ -44,10 +44,7 @@ topMenuEl.style.backgroundColor = 'var(--top-menu-bg)';
 topMenuEl.classList.add('flex-around');
 
 menuLinks.forEach((menuLink) => {
-  const anchorEl = document.createElement('a');
-  anchorEl.setAttribute('href', menuLink.href);
-  anchorEl.textContent = menuLink.text;
-  topMenuEl.append(anchorEl);
+  menuCreator(topMenuEl, menuLink);
 });
 
 subMenuEl.style.height = '100%';
@@ -107,9 +104,13 @@ subMenuEl.addEventListener('click', (event) => {
 function buildSubmenu(menuLink) {
   subMenuEl.textContent = '';
   menuLink.subLinks.forEach((subLink) => {
-    const anchorEl = document.createElement('a');
-    anchorEl.setAttribute('href', subLink.href);
-    anchorEl.textContent = subLink.text;
-    subMenuEl.append(anchorEl);
+    menuCreator(subMenuEl, subLink);
   });
+}
+
+function menuCreator(menu, link) {
+  const anchorEl = document.createElement('a');
+  anchorEl.setAttribute('href', link.href);
+  anchorEl.textContent = link.text;
+  menu.append(anchorEl);
 }
